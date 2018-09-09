@@ -77,7 +77,7 @@ git fetch origin
 git reset --hard origin-master
 
 ```
-##6.参考网址
+## 6.参考网址
 https://zhuanlan.zhihu.com/p/21193604
 
 
