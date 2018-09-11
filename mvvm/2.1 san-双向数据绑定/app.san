@@ -1,0 +1,59 @@
+<template>
+    <div class="panel">
+        <div class="inputarea">
+            <input value="{= name =}" name="name" type="text" placeholder="姓名">
+            <input value="{= age =}" name="age" type="number" placeholder="年龄">
+            <input value="{= des =}" name="des" type="text" placeholder="简介">
+        </div>
+        <div class="buttonarea">
+            <button on-click="clearInfo">移除信息</button>
+        </div>
+        <div class="infoarea">
+            <p>姓名 {{name}}</p>
+            <p>年龄 {{age}}</p>
+            <p>简介 {{des}}</p>
+        </div>
+    </div>
+</template>
+
+<script>
+import {DataTypes} from 'san';
+    export default {
+        initData () {
+            return {
+                    name:'',
+                    age:undefined,
+                    des:''
+            };
+        },
+        dataTypes:{
+            name: DataTypes.string,
+            age: DataTypes.number,
+            des: DataTypes.string
+        },
+        clearInfo() {
+            this.data.set('age',undefined)
+            this.data.set('des','')
+            this.data.set('name','')
+        }
+    }
+</script>
+
+<style>
+    .panel{
+        width:50%;
+        margin:0 auto;
+        background:#eee;
+        padding:10px;
+    }
+    input{
+        width:150px;
+        height:30px;
+        margin-right:10px;
+    }
+    button{
+        margin-top:10px;
+        width:100px;
+        height:30px;
+    }
+</style>
