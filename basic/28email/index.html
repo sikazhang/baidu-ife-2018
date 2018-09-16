@@ -1,0 +1,87 @@
+<html>
+	<style>
+	.email-sug{
+		padding:0;
+		margin:0;
+		width:131px;
+	}
+	.email-sug li{
+		list-style-type: none;
+		border:1px solid #f0f0f0;
+		cursor:pointer;
+	}
+	.email-sug li:hover{
+		background-color: pink;
+	}
+	</style>
+	<body>
+		<div class="wrapper">
+			<input id="email-input" type="text">
+			<ul id="email-sug-wrapper" class="email-sug" style="display:none"></ul>
+		</div>
+		<script>
+			var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net']
+			let input = document.getElementById('email-input')
+			let ul = document.getElementById('email-sug-wrapper')
+			input.addEventListener('keyup',tap2)
+			ul.addEventListener('click',chooseLi)
+			function tap2(){
+				console.log('keydown')
+				let content = input.value.trim()
+				let res = hintContent(content)
+				isShowTags(res.content)
+				getEmailArr(res.content,res.prefix)
+			}
+			function chooseLi(e) {
+				if(e.target.id){
+					// changeBg(e.target.id)
+					let content = e.target.id
+					input.value = content
+					hide()
+				}
+			}
+			function hintContent(content) {
+				let index = content.indexOf('@')
+				let res = {}
+				if(index>-1) {
+					res.content = content.slice(0,index)
+					res.prefix = content.slice(index+1)
+				} else {
+					res.content = content
+					res.prefix = ''
+				}
+				return res
+			}
+			function isShowTags(content){
+				if(content){
+					show()
+				} else {
+					hide()
+				}
+			}
+			function show(){
+				ul.style.display = 'block';
+			}
+			function hide(){
+				ul.style.display = 'none';
+			}
+			function getEmailArr(content,prefix){
+				let arr = []
+				let subarr = []
+				for(item of postfixList) {
+					let str = content + '@' + item
+					subarr.push('<li id='+str+'>'+str+'</li>')
+					var re = new RegExp("^"+prefix)
+					if(!re.test(item)) continue
+					arr.push('<li id='+str+'>'+str+'</li>')
+				}
+				if (arr.length === 0) {
+					ul.innerHTML = subarr.join('')
+				} else {
+					ul.innerHTML = arr.join('')
+				}	
+			}
+
+		</script>
+	</body>
+</html>
