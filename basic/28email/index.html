@@ -19,15 +19,19 @@
 			<input id="email-input" type="text">
 			<ul id="email-sug-wrapper" class="email-sug" style="display:none"></ul>
 		</div>
+		<script src="./utils.js"></script>
 		<script>
 			var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net']
 			let input = document.getElementById('email-input')
 			let ul = document.getElementById('email-sug-wrapper')
+			var nowSelectTipIndex = 0;
 			input.addEventListener('keyup',tap2)
 			ul.addEventListener('click',chooseLi)
+			
 			function tap2(){
 				console.log('keydown')
 				let content = input.value.trim()
+				content = HtmlUtil.htmlEncode(content)
 				let res = hintContent(content)
 				isShowTags(res.content)
 				getEmailArr(res.content,res.prefix)
@@ -36,6 +40,7 @@
 				if(e.target.id){
 					// changeBg(e.target.id)
 					let content = e.target.id
+					content = HtmlUtil.htmlDecode(content)
 					input.value = content
 					hide()
 				}
