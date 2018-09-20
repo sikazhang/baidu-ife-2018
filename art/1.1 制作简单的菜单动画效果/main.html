@@ -3,21 +3,37 @@
     .main{
         margin:0 auto;
         width:300px;
+        text-align: center;
     }
     .hide{
-        border-bottom:1px solid aquamarine;
         color:aquamarine;
         transition: all 1s ease-in-out
     }
     .show{
-        border-bottom:0px solid aquamarine;
         color:black;
+        transition: all 1s ease-in-out
+    }
+    .showline{
+        margin:0 auto;
+        text-align: center;
+        height:2px;
+        width:300px;
+        background-color: aquamarine;
+        transition: all 1s ease-in-out
+    }
+    .hideline{
+        margin:0 auto;
+        text-align: center;
+        height:2px;
+        width:0;
+        background-color: aquamarine;
         transition: all 1s ease-in-out
     }
     </style>
     <body>
         <div class="main">
             <p id="title" class="hide">前端学院</p>
+            <div id="line" class="showline"></div>
             <button id="btn">切换样式</button>
         </div>
     </body>
@@ -25,13 +41,16 @@
         let isShow = false
         let btn = document.getElementById('btn')
         let title = document.getElementById('title')
+        let line = document.getElementById('line')
         btn.addEventListener('click',changeStyle)
         function changeStyle() {
             if(!isShow) {
                 title.className = 'show'
+                line.className = 'hideline'
                 isShow = true
             } else{
                 title.className = 'hide'
+                line.className = 'showline'
                 isShow = false
             }
         }
